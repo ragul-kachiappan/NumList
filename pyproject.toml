@@ -1,0 +1,27 @@
+[project]
+name = "numlist"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "ragul-kachiappan", email = "rahul.kachiappan@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "prompt-toolkit>=3.0.51",
+    "typer>=0.16.0",
+]
+
+[project.scripts]
+numlist = "numlist:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "isort>=6.0.1",
+    "mypy>=1.15.0",
+]
