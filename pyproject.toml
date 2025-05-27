@@ -33,9 +33,9 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "black>=25.1.0",
-    "isort>=6.0.1",
+    "ruff>=0.3.4",
     "mypy>=1.15.0",
+    "pre-commit>=4.2.0",
 ]
 
 [project.scripts]
@@ -52,29 +52,32 @@ include = [
     "/pyproject.toml",
 ]
 
-[tool.black]
+[tool.ruff]
 line-length = 88
-target-version = ['py38']
-include = '\.pyi?$'
-extend-exclude = '''
-/(
-  # directories
-  \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | build
-  | dist
-)/
-'''
+target-version = "py312"
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-line_length = 88
-known_first_party = ["numlist"]
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "C",   # flake8-comprehensions
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "N",   # pep8-naming
+    "PL",  # pylint
+    "RUF", # ruff-specific rules
+]
+ignore = [
+    "B008",  # Ignore typer argument/option call warnings
+    "C901",  # Ignore function complexity
+    "PLR0912",  # Ignore too many branches
+    "PLR2004",  # Ignore magic number in comparison
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["numlist"]
 
 [tool.mypy]
 python_version = "3.8"
@@ -100,4 +103,3 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
-
